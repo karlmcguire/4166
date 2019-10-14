@@ -23,13 +23,13 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Start a new connection</a>
+              <a class="nav-link" href="/newConnection/">Start a new connection</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/savedConnections.html">Login</a>
+              <a class="nav-link" href="/savedConnections/">Login</a>
             </li>
             <li class="nav-item ml-2">
-              <a href="/savedConnections.html" class="btn btn-outline-success">Sign up</a>
+              <a href="/savedConnections/" class="btn btn-outline-success">Sign up</a>
             </li>
           </ul>
         </div>
@@ -38,7 +38,7 @@
     <div class="container">
       <nav aria-label="breadcrumb" class="mt-4">
         <ol class="breadcrumb">
-          <li><a href="/connections.html">Connections</a></li>
+          <li><a href="/connections/">Connections</a></li>
         </ol>
       </nav>
 
@@ -60,22 +60,22 @@
           <div class="col-6 col-md">
             <h5>View</h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="/connections.html">Connections</a></li>
-              <li><a class="text-muted" href="/savedConnections.html">Saved Connections</a></li>
+              <li><a class="text-muted" href="/connections/">Connections</a></li>
+              <li><a class="text-muted" href="/savedConnections/">Saved Connections</a></li>
             </ul>
           </div>
           <div class="col-6 col-md">
             <h5>Resources</h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Contact Us</a></li>
+              <li><a class="text-muted" href="/contact/">Contact Us</a></li>
               <li><a class="text-muted" href="#">Datasets</a></li>
             </ul>
           </div>
           <div class="col-6 col-md">
             <h5>About</h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Team</a></li>
-              <li><a class="text-muted" href="#">Origins</a></li>
+              <li><a class="text-muted" href="/about/">Team</a></li>
+              <li><a class="text-muted" href="/about/">Origins</a></li>
             </ul>
           </div>
         </div>

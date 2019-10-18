@@ -10,13 +10,14 @@
       <div class="pt-4 pb-2">
         <div class="row">
           <div class="col-8">
-            <h2 class="mb-3">Web Programming</h2> 
-            <p>At this event we will go over the basics of web programming. By the end of our 2 hour session, you should have a functioning website that you can proudly present to your friends, family, and potential employers. In today's market, a web presence is absolutely essential.</p>
-            <p>Come learn how to make your own websites!</p>
+            <h2 class="mb-3"><%= data.title %></h2> 
+            <p><%= data.details %></p>
             <div class="card mt-5">
               <div class="pt-3 pr-3 pl-3">
                 <h4>Are you going?</h4> 
-                <p class="text-secondary">34 people are going.</p>
+                <p class="text-secondary">
+                    <%= data.going %> people are going.
+                </p>
               </div>
               <div class="pl-3 pr-3 pb-3">
                 <div class="btn-group btn-block" role="group" aria-label="Basic example">
@@ -29,15 +30,7 @@
           </div> 
           <div class="col-4">
             <h4 class="ml-3">About</h4> 
-            <div class="card p-3 m-3">
-              <img class="ml-auto mr-auto" width="200" height="200" alt="Face" src="face.jpg">
-            </div>
-            <ul class="ml-0">
-              <li>Hosted by James B. Johnson</li>
-              <li>Wednesday, September 18th</li>
-              <li>3:00 - 5:00pm</li>
-              <li>Starbucks</li>
-            </ul>
+            <p class="ml-3"><%= data.about %></p> 
           </div> 
         </div> 
       </div>

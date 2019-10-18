@@ -9,17 +9,14 @@
 
       <div class="pt-4 pb-2">
         <h1 class="text-secondary pb-4">Connections</h1> 
-        <h2 class="pb-3">Operating Systems</h2>
         <ul>
-          <li><a href="/connection/"><h4>BSD</h4></a></li>
-          <li><a href="/connection/"><h4>GNU/Linux</h4></a></li>
-          <li><a href="/connection/"><h4>OSX</h4></a></li>
-        </ul>
-        <h2 class="pb-3">Programming</h2>
-        <ul>
-          <li><a href="/connection/"><h4>Graphics</h4></a></li>
-          <li><a href="/connection/"><h4>Web</h4></a></li>
-          <li><a href="/connection/"><h4>System</h4></a></li>
+          <% for(var i = 0; i < data.length; i++) { %>
+                <li>
+                    <a href="/connection/<%= data[i].id %>">
+                        <h4><%= data[i].title %></h4>
+                    </a>
+                </li>
+          <% } %>
         </ul>
       </div>
 

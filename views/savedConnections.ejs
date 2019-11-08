@@ -1,12 +1,5 @@
 <% include header %>
 
-    <div class="container">
-      <nav aria-label="breadcrumb" class="mt-4">
-        <ol class="breadcrumb">
-          <li><a href="/connections">Connections</a></li>
-        </ol>
-      </nav>
-
       <div class="pt-4 pb-2">
         <h1 class="text-secondary pb-4">Saved Connections</h1> 
         <table class="table">
@@ -19,28 +12,19 @@
     </tr>
   </thead>
   <tbody>
+  <% for(var i = 0; i < data.length; i++) { %>
     <tr>
-      <td>Web</td>
-      <td>Programming</td>
-      <td>Yes</td>
-      <td>
-				<div class="btn-group" role="group">
-					<a href="/connection" class="btn btn-primary">Update</a>
-					<a href="/savedConnections" class="btn btn-danger">Delete</a>
-				</div>
-			</td>
+        <td><%= data[i].connection.title %></td>
+        <td><%= data[i].connection.name %></td>
+        <td><%= data[i].connection.rsvp %></td>
+        <td>
+            <div class="btn-group" role="group">
+                <a href="/connection/<%= data[i].connection.id %>" class="btn btn-primary">Update</a>
+                <a href="/deleteConnection/<%= data[i].connection.id %>" class="btn btn-danger">Delete</a>
+            </div>
+        </td>
     </tr>
-    <tr>
-      <td>BSD</td>
-      <td>Operating Sytems</td>
-      <td>Maybe</td>
-      <td>
-				<div class="btn-group" role="group">
-					<a href="/connection" class="btn btn-primary">Update</a>
-					<a href="/savedConnections" class="btn btn-danger">Delete</a>
-				</div>
-			</td>
-    </tr>
+  <% } %>
   </tbody>
 </table>
       </div>

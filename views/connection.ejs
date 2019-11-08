@@ -1,12 +1,5 @@
 <% include header %>
 
-    <div class="container">
-      <nav aria-label="breadcrumb" class="mt-4">
-        <ol class="breadcrumb">
-          <li><a href="/connections">Connections</a></li>
-        </ol>
-      </nav>
-
       <div class="pt-4 pb-2">
         <div class="row">
           <div class="col-8">
@@ -21,9 +14,9 @@
               </div>
               <div class="pl-3 pr-3 pb-3">
                 <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                  <a href="/savedConnections.html" class="btn btn-success">Yes</a>
-                  <a href="/savedConnections.html" class="btn btn-danger">No</a>
-                  <a href="/savedConnections.html" class="btn btn-primary">Maybe</a>
+                  <a href="/connection/<%= data.id %>/add/yes" class="btn btn-success">Yes</a>
+                  <a href="/connection/<%= data.id %>/add/no" class="btn btn-danger">No</a>
+                  <a href="/connection/<%= data.id %>/add/maybe" class="btn btn-primary">Maybe</a>
                 </div>
               </div>
             </div>

@@ -12,13 +12,32 @@
             <li class="nav-item">
               <a class="nav-link" href="/newConnection/">Start a new connection</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/savedConnections/">Login</a>
-            </li>
-            <li class="nav-item ml-2">
-              <a href="/savedConnections/" class="btn btn-outline-success">Sign up</a>
-            </li>
+            <% if(user == undefined) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login/">Login</a>
+                </li>
+                <li class="nav-item ml-2">
+                  <a href="/savedConnections/" class="btn btn-outline-success">Sign up</a>
+                </li>
+            <% } else { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/savedConnections">My Connections</a>
+                </li>
+                <li class="nav-item ml-2">
+                  <a href="/signOut" class="btn btn-outline-success">Sign Out</a>
+                </li>
+            <% } %>
           </ul>
         </div>
       </div>
     </nav>
+
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mt-4">
+        <ol class="breadcrumb d-flex justify-content-between">
+          <li><a href="/connections/">Connections</a></li>
+          <% if(user != undefined) { %>
+            <li>Signed in as <%= user.firstName %> <%= user.lastName %></li>
+          <% } %>
+        </ol>
+      </nav>

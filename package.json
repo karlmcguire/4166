@@ -1,0 +1,26 @@
+{
+  "name": "hw3",
+  "version": "1.0.0",
+  "description": "milestone 3 for 4166",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/karlmcguire/4166.git"
+  },
+  "author": "Karl McGuire",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karlmcguire/4166/issues"
+  },
+  "homepage": "https://github.com/karlmcguire/4166#readme"
+}

@@ -17,7 +17,7 @@
                   <a class="nav-link" href="/login/">Login</a>
                 </li>
                 <li class="nav-item ml-2">
-                  <a href="/savedConnections/" class="btn btn-outline-success">Sign up</a>
+                  <a href="/login/" class="btn btn-outline-success">Sign up</a>
                 </li>
             <% } else { %>
                 <li class="nav-item">
@@ -37,7 +37,7 @@
         <ol class="breadcrumb d-flex justify-content-between">
           <li><a href="/connections/">Connections</a></li>
           <% if(user != undefined) { %>
-            <li>Signed in as <%= user.firstName %> <%= user.lastName %></li>
+            <li>Signed in as <%= user.getName() %></li>
           <% } %>
         </ol>
       </nav>

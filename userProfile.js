@@ -10,10 +10,13 @@ module.exports = class UserProfile {
     this.connections.set(userConnection.id(), userConnection) 
   }
   removeConnection(id) {
-    this.connections.delete(id)
+    return this.connections.delete(id)
   }
   getConnections() {
     return this.connections
+  }
+  getName() {
+    return this.user.firstName + " " + this.user.lastName
   }
   emptyProfile() {
     this.user = null

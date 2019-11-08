@@ -13,11 +13,13 @@
                 </p>
               </div>
               <div class="pl-3 pr-3 pb-3">
-                <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                  <a href="/connection/<%= data.id %>/add/yes" class="btn btn-success">Yes</a>
-                  <a href="/connection/<%= data.id %>/add/no" class="btn btn-danger">No</a>
-                  <a href="/connection/<%= data.id %>/add/maybe" class="btn btn-primary">Maybe</a>
-                </div>
+                <form class="form-inline" method="POST" action="/update/<%= data.id %>">
+                  <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                    <button type="submit" name="rsvp" class="btn btn-success" value="yes">Yes</button>
+                    <button type="submit" name="rsvp" class="btn btn-danger" value="no">No</button>
+                    <button type="submit" name="rsvp" class="btn btn-primary" value="maybe">Maybe</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div> 

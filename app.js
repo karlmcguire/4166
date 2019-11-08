@@ -37,8 +37,11 @@ app.get("/login", (req, res) => {
 })
 
 app.get("/signOut", (req, res) => {
-  userProfiles[req.session.profileId].emptyProfile()
-  req.session.profileId = null
+  const user = userProfiles[req.session.profileId]
+  if(user != undefined) {
+    userProfiles[req.session.profileId].emptyProfile()
+    req.session.profileId = null
+  }
   res.redirect("/")
 })
 
@@ -73,21 +76,21 @@ app.get("/connection/:id", (req, res) => {
   })
 })
 
-app.get("/connection/:id/add/:rsvp", (req, res) => {
-  const user = userProfiles[req.session.profileId]
-  if(user) {
-    user.addConnection(
-      new UserConnection(
-        connection.getConnection(req.params.id),
-        req.params.rsvp)) 
-  }
-  res.redirect("/savedConnections")
-})
-
 app.get("/newConnection", (req, res) => {
   res.render("newConnection", {
     user: userProfiles[req.session.profileId]
   })
+})
+
+app.post("/update/:id", (req, res) => {
+  const user = userProfiles[req.session.profileId]
+  if(user != undefined) {
+    user.addConnection(
+      new UserConnection(
+        connection.getConnection(req.params.id), 
+        req.body.rsvp))
+  }
+  res.redirect("/savedConnections")
 })
 
 app.post("/newConnection", (req, res) => {
@@ -103,6 +106,10 @@ app.post("/newConnection", (req, res) => {
 
 app.get("/savedConnections", (req, res) => {
   const user = userProfiles[req.session.profileId]
+  if(user == undefined) {
+    res.render("savedConnections", {data: [], user: undefined})
+    return
+  }
   res.render("savedConnections", {
     data: Array.from(user.getConnections().values()),
     user: user 
@@ -110,7 +117,10 @@ app.get("/savedConnections", (req, res) => {
 })
 
 app.get("/deleteConnection/:id", (req, res) => {
-  userProfiles[req.session.profileId].removeConnection(Number(req.params.id))
+  const user = userProfiles[req.session.profileId]
+  if(user != undefined) {
+    user.removeConnection(Number(req.params.id))
+  }
   res.redirect("/savedConnections") 
 })
 

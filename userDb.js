@@ -1,12 +1,16 @@
-const User = require("./user.js")
+const mongoose = require("mongoose")
 
-let users = [
-  new User(0, "Karl", "McGuire", "karl@karlmcguire.com"),
-  new User(1, "Sarah", "Goldstein", "sarah@gmail.com"),
-  new User(2, "John", "Smith", "john.smith@gmail.com"),
-  new User(3, "Bob", "Stevens", "bob@gmail.com"),
-]
+const userSchema = new mongoose.Schema({
+  id: Number,
+  firstName: String,
+  lastName: String,
+  email: String
+})
 
-module.exports.GetRandomUser = () => {
-  return users[Math.floor(Math.random() * Math.floor(users.length))]
-}
+const User = mongoose.model("user", userSchema)
+
+module.exports.getAllUsers = () => User.find({}).exec()
+
+module.exports.getUser = (id) => User.findOne({id: id}).exec()
+
+module.exports.GetRandomUser = () => User.countDocuments({}).exec()

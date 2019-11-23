@@ -3,11 +3,18 @@ const app = express()
 const connection = require("./connection.js")
 const bodyParser = require("body-parser")
 const session = require("express-session")
-
-const User = require("./user.js")
 const UserDB = require("./userDb.js")
 const UserConnection = require("./userConnection.js")
 const UserProfile = require("./userProfile.js")
+
+const mongoose = require("mongoose")
+mongoose.connect("mongodb://localhost/blit", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+const db = mongoose.connection
+db.on("error", console.error.bind(console, "connection error"))
+db.once("open", () => console.log("mongo connected"))
 
 app.use(session({
   secret: "thesecret",
@@ -19,67 +26,72 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use("/css", express.static("css"))
 app.use("/js", express.static("js"))
 
-let userProfiles = new Array()
+app.use((req, res, next) => {
+  if(req.session.profileId) {
+    UserDB.getUser(req.session.profileId).then((user) => {
+      req.user = user
+      next()
+    })
+  } else {
+    next()
+  }
+})
 
 app.get("/", (req, res) => {
-  res.render("index", {
-    user: userProfiles[req.session.profileId]
-  })
+  res.render("index", {user: req.user})
 })
 
 app.get("/login", (req, res) => {
-  if(!req.session.profileId) {
-    req.session.profileId = (userProfiles.push(
-      new UserProfile(
-        UserDB.GetRandomUser()))) - 1
+  if(!req.user) {
+    UserDB.getUser(Math.floor(Math.random() * 4)).then((user) => {
+      req.session.profileId = user.id 
+      res.redirect("/connections")
+    })
+  } else {
+    res.redirect("/")
   }
-  res.redirect("/connections")
 })
 
 app.get("/signOut", (req, res) => {
-  const user = userProfiles[req.session.profileId]
-  if(user != undefined) {
-    userProfiles[req.session.profileId].emptyProfile()
+  if(req.user) {
     req.session.profileId = null
+    req.user = null
   }
   res.redirect("/")
 })
 
 app.get("/about", (req, res) => {
-  res.render("about", {
-    user: userProfiles[req.session.profileId]
-  })
+  res.render("about", {user: req.user})
 })
 
 app.get("/contact", (req, res) => {
-  res.render("contact", {
-    user: userProfiles[req.session.profileId]
-  }) 
+  res.render("contact", {user: req.user}) 
 })
 
 app.get("/connections", (req, res) => {
-  res.render("connections", {
-    data: connection.getConnections(),
-    user: userProfiles[req.session.profileId] 
+  connection.getConnections().then((data) => {
+    res.render("connections", {
+      data: data,
+      user: req.user
+    })
   })
 })
 
 app.get("/connection/:id", (req, res) => {
-  const data = connection.getConnection(req.params.id)
-  if(data == null) {
-    res.redirect("/connections") 
-    return
-  }
-  res.render("connection", {
-    data: data,
-    user: userProfiles[req.session.profileId]
+  connection.getConnection(req.params.id).then((data) => {
+    if(data == null) {
+      res.redirect("/connections") 
+      return
+    }
+    res.render("connection", {
+      data: data,
+      user: req.user
+    })
   })
 })
 
 app.get("/newConnection", (req, res) => {
-  res.render("newConnection", {
-    user: userProfiles[req.session.profileId]
-  })
+  res.render("newConnection", {user: user})
 })
 
 app.post("/update/:id", (req, res) => {

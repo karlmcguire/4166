@@ -7,3 +7,10 @@ module.exports = class UserConnection {
     return this.connection.id
   }
 }
+
+const mongoose = require("mongoose")
+
+const userConnectionSchema = new mongoose.Schema({
+  connection: Number,
+  rsvp: String
+})

@@ -37,7 +37,7 @@
         <ol class="breadcrumb d-flex justify-content-between">
           <li><a href="/connections/">Connections</a></li>
           <% if(user != undefined) { %>
-            <li>Signed in as <%= user.getName() %></li>
+            <li>Signed in as <%= user.firstName %> <%= user.lastName %></li>
           <% } %>
         </ol>
       </nav>

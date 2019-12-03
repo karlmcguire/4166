@@ -85,10 +85,12 @@ app.post("/signIn", (req, res) => {
 })
 
 app.get("/signOut", (req, res) => {
-  if(req.user) {
-    req.session.profileId = null
-    req.user = null
+  if(!req.user) {
+    res.redirect("/login")
+    return
   }
+  req.session.profileId = null
+  req.user = null
   res.redirect("/")
 })
 
@@ -133,27 +135,27 @@ app.post("/newConnection", (req, res) => {
     req.body.topic, 
     req.body.description, 
     req.body.location + " at " + req.body.when, 
-    0, 
+    Math.floor(Math.random() * Math.floor(100)), 
   )
   res.redirect("/connections")
 })
 
 app.post("/update/:id", (req, res) => {  
-  if(req.user) {
-    UserConnectionDB.updateOrAddRSVP(
-      req.params.id, 
-      req.userId, 
-      req.body.rsvp
-    )
+  if(!req.user) {
+    res.redirect("/login")
+    return
   }
+  UserConnectionDB.updateOrAddRSVP(req.params.id, req.userId, req.body.rsvp)
   res.redirect("/savedConnections")
 })
 
 
 app.get("/deleteConnection/:id", (req, res) => {
-  if(req.user) {
-    UserConnectionDB.deleteRSVP(req.params.id, req.userId)
+  if(!req.user) {
+    res.redirect("/login")
+    return
   }
+  UserConnectionDB.deleteRSVP(req.params.id, req.userId)
   res.redirect("/savedConnections")
 })
 

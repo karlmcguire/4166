@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
 const session = require("express-session")
+const {check, validationResult} = require("express-validator")
+const helmet = require("helmet")
 
 const ConnectionDB = require("./connectionDb.js")
 const UserDB = require("./userDb.js")
@@ -18,6 +20,7 @@ const db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error"))
 db.once("open", () => console.log("mongo connected"))
 
+app.use(helmet())
 app.use(session({
   secret: "thesecret",
   resave: true,
@@ -55,14 +58,16 @@ app.get("/login", (req, res) => {
   })
 })
 
-app.post("/signIn", (req, res) => {
+app.post("/signIn", [
+  check("username").isAlpha().isLength({min: 3}),
+  check("password").isLength({min: 4})
+], (req, res) => {
   if(req.user) {
     res.redirect("/savedConnections")
     return
   }
-  // basic username and password validation
-  if(!req.body.username || req.body.username == "" ||
-     !req.body.password || req.body.password == "") {
+  const errors = validationResult(req)
+  if(!errors.isEmpty()) {
     res.redirect("/login?failed=true")
     return
   }
@@ -126,13 +131,27 @@ app.get("/connection/:id", (req, res) => {
 })
 
 app.get("/newConnection", (req, res) => {
-  res.render("newConnection", {user: req.user})
+  res.render("newConnection", {
+    failed: req.query.failed,
+    user: req.user
+  })
 })
 
-app.post("/newConnection", (req, res) => {
+app.post("/newConnection", [
+  check("topic").isAlphanumeric().isLength({max: 300}),
+  check("name").isLength({max: 300}),
+  check("body").isLength({max: 2500}),
+  check("location").isLength({max: 100}),
+  check("when").isAfter()
+], (req, res) => {
+  const errors = validationResult(req)
+  if(!errors.isEmpty()) {
+    res.redirect("/newConnection?failed=true")
+    return
+  }
   ConnectionDB.addConnection(
-    req.body.name, 
     req.body.topic, 
+    req.body.name, 
     req.body.description, 
     req.body.location + " at " + req.body.when, 
     Math.floor(Math.random() * Math.floor(100)), 

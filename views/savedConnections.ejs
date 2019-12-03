@@ -14,13 +14,13 @@
   <tbody>
   <% for(var i = 0; i < data.length; i++) { %>
     <tr>
-        <td><%= data[i].connection.title %></td>
-        <td><%= data[i].connection.name %></td>
+        <td><%= data[i].connection[0].title %></td>
+        <td><%= data[i].connection[0].name %></td>
         <td><%= data[i].rsvp %></td>
         <td>
             <div class="btn-group" role="group">
-                <a href="/connection/<%= data[i].connection.id %>" class="btn btn-primary">Update</a>
-                <a href="/deleteConnection/<%= data[i].connection.id %>" class="btn btn-danger">Delete</a>
+                <a href="/connection/<%= data[i].connection[0].id %>" class="btn btn-primary">Update</a>
+                <a href="/deleteConnection/<%= data[i].connection[0].id %>" class="btn btn-danger">Delete</a>
             </div>
         </td>
     </tr>

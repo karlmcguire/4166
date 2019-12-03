@@ -7,6 +7,7 @@ const ConnectionDB = require("./connectionDb.js")
 const UserDB = require("./userDb.js")
 const UserConnectionDB = require("./userConnectionDb.js")
 const UserProfile = require("./userProfile.js")
+const security = require("./security.js")
 
 const mongoose = require("mongoose")
 mongoose.connect("mongodb://localhost/blit", {
@@ -44,14 +45,43 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-  if(!req.user) {
-    UserDB.getUser(Math.floor(Math.random() * 4)).then((user) => {
-      req.session.profileId = user.id 
-      res.redirect("/connections")
-    })
-  } else {
-    res.redirect("/")
+  if(req.user) {
+    res.redirect("/savedConnections")
+    return
   }
+  res.render("login", {
+    user: null,
+    failed: req.query.failed
+  })
+})
+
+app.post("/signIn", (req, res) => {
+  if(req.user) {
+    res.redirect("/savedConnections")
+    return
+  }
+  // basic username and password validation
+  if(!req.body.username || req.body.username == "" ||
+     !req.body.password || req.body.password == "") {
+    res.redirect("/login?failed=true")
+    return
+  }
+  UserDB.findUser(req.body.username).then((user) => {
+    // user doesn't exist with that username
+    if(!user) {
+      res.redirect("/login?failed=true")
+      return
+    }
+    // user password is wrong
+    if(security.genHash(user.salt, req.body.password) != user.hash) {
+      res.redirect("/login?failed=true")
+      return
+    }
+    // user credentials are correct and start the session (middleware will take
+    // care of the rest)
+    req.session.profileId = user.id 
+    res.redirect("/savedConnections")
+  })
 })
 
 app.get("/signOut", (req, res) => {
@@ -81,6 +111,7 @@ app.get("/connections", (req, res) => {
 
 app.get("/connection/:id", (req, res) => {
   ConnectionDB.getConnection(req.params.id).then((data) => {
+    // connection request validation
     if(data == null) {
       res.redirect("/connections") 
       return
@@ -95,7 +126,6 @@ app.get("/connection/:id", (req, res) => {
 app.get("/newConnection", (req, res) => {
   res.render("newConnection", {user: req.user})
 })
-
 
 app.post("/newConnection", (req, res) => {
   ConnectionDB.addConnection(
@@ -129,7 +159,7 @@ app.get("/deleteConnection/:id", (req, res) => {
 
 app.get("/savedConnections", (req, res) => {
   if(!req.user) {
-    res.render("savedConnections", {data: [], user: null})
+    res.redirect("/login")
     return
   }
   UserConnectionDB.UserConnection.aggregate([

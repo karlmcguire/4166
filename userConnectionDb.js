@@ -48,3 +48,5 @@ module.exports.deleteRSVP = (connectionId, userId) => {
     userId: userId
   }).exec()
 }
+
+module.exports.removeConnection = (connectionId) => UserConnection.deleteMany({connectionId: connectionId})

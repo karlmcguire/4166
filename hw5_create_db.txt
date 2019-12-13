@@ -42,55 +42,65 @@ db.users.insert({
 
 db.connections.insert({
     id: 0,
+    topic: "Operating Systems",
     name: "BSD",
-    title: "Operating Systems / BSD",
-    details: "Are you a developer or systems administrator looking to hang out with other professionals working with BSD on a daily basis? If so, this connection is for you! We're all hard working professionals and have keen interests in BSD and all things Unix. Feel free to stop by!",
-    about: "We're a small group of around 20 guys and like discussing BSD over beer and food.",
+    description: "Are you a developer or systems administrator looking to hang out with other professionals working with BSD on a daily basis? If so, this connection is for you! We're all hard working professionals and have keen interests in BSD and all things Unix. Feel free to stop by!",
+    location: "Charlotte",
+    when: "2016-10-05T14:48:00.000",
     going: 12
 })
 
 db.connections.insert({
     id: 1,
+    ownerId: -1,
+    topic: "Operating Systemsj",
     name: "Linux",
-    title: "Operating Systems / Linux",
-    details: "We're a space dedicated to giving talks about all things Linux. If you work with Linux in your job or are simply interested in the history and applications of Linux, this is the place to be.",
-    about: "We're a group of 50-60 professionals.",
+    description: "We're a space dedicated to giving talks about all things Linux. If you work with Linux in your job or are simply interested in the history and applications of Linux, this is the place to be.",
+    location: "Charlotte",
+    when: "2016-10-05T14:48:00.000",
     going: 132
 })
 
 db.connections.insert({
     id: 2,
+    ownerId: -1,
+    topic: "Operating Systems",
     name: "Mac",
-    title: "Operating Systems / Mac",
-    details: "We're a space dedicated to giving talks about all things Mac. If you work with Mac in your job or are simply interested in the history and applications of Mac, this is the place to be.",
-    about: "We're a group of 20-50 professionals.",
+    description: "We're a space dedicated to giving talks about all things Mac. If you work with Mac in your job or are simply interested in the history and applications of Mac, this is the place to be.",
+    location: "Charlotte",
+    when: "2016-10-05T14:48:00.000",
     going: 74
 })
 
 db.connections.insert({
     id: 3,
+    ownerId: -1,
+    topic: "Programming",
     name: "Web",
-    title: "Programming / Web",
-    details: "At this event we will go over the basics of web programming. By the end of our 2 hour session, you should have a functioning website that you can proudly present to your friends, family, and potential employers. In today's market, a web presence is absolutely essential.",
-    about: "I'm James B. Johnson and we'll be giving the talk September 18th from 3:00 - 5:00pm in the Starbucks.",
+    description: "At this event we will go over the basics of web programming. By the end of our 2 hour session, you should have a functioning website that you can proudly present to your friends, family, and potential employers. In today's market, a web presence is absolutely essential.",
+    location: "Charlotte",
+    when: "2016-10-05T14:48:00.000",
     going: 12
 })
 
 db.connections.insert({
     id: 4,
+    ownerId: -1,
+    topic: "Programming",
     name: "Blockchain",
-    title: "Programming / Blockchain",
-    details: "Blockchains are becoming more and more important in our daily lives. The industry is currently exploding, and if you want to stay ahead of the curve and prepare to work with blockchains, this connection is for you. Come and see talks given by experienced professionals.",
-    about: "We're 15 industry experts trying to raise awareness.",
+    description: "Blockchains are becoming more and more important in our daily lives. The industry is currently exploding, and if you want to stay ahead of the curve and prepare to work with blockchains, this connection is for you. Come and see talks given by experienced professionals.",
+    location: "Charlotte",
+    when: "2016-10-05T14:48:00.000",
     going: 68
 })
 
 db.connections.insert({
     id: 5,
+    ownerId: -1,
+    topic: "Programming",
     name: "Systems",
-    title: "Programming / Systems",
-    details: "Systems programming isn't going anywhere, even if it's old. If you're interested in low level programming in languages such as C and C++, this connection is for you. You'll learn a lot by talking with our experienced programmers.",
-    about: "We're 10 industry experts trying to help people learn.",
+    description: "Systems programming isn't going anywhere, even if it's old. If you're interested in low level programming in languages such as C and C++, this connection is for you. You'll learn a lot by talking with our experienced programmers.",
+    location: "Charlotte",
+    when: "2016-10-05T14:48:00.000",
     going: 32
 })
-

@@ -3,8 +3,21 @@
       <div class="pt-4 pb-2">
         <div class="row">
           <div class="col-8">
-            <h2 class="mb-3"><%= data.title %></h2> 
-            <p><%= data.details %></p>
+            <h2 class="mb-3">
+              <%= data.topic %> / <%= data.name %>
+              <% if(user != undefined && data.ownerId == user.id) { %>
+                <span class="badge badge-secondary">Owner</span>
+              <% } %>
+            </h2> 
+            <% if(user != undefined && data.ownerId == user.id) { %>
+                <div class="btn-group" role="group">
+                  <a class="btn btn-danger" href="/removeConnection/<%= data.id %>">Delete</a>
+                  <a class="btn btn-warning" href="/editConnection/<%= data.id %>">Edit</a>
+                </div>
+                <br>
+                <br>
+            <% } %>
+            <p><%= data.description %></p>
             <div class="card mt-5">
               <div class="pt-3 pr-3 pl-3">
                 <h4>Are you going?</h4> 
@@ -25,7 +38,7 @@
           </div> 
           <div class="col-4">
             <h4 class="ml-3">About</h4> 
-            <p class="ml-3"><%= data.about %></p> 
+            <p class="ml-3"><%= data.location %> at <%= data.when %></p> 
           </div> 
         </div> 
       </div>

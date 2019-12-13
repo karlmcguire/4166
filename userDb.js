@@ -19,3 +19,17 @@ module.exports.getAllUsers = () => User.find({}).exec()
 module.exports.getUser = (id) => User.findOne({id: id}).exec()
 
 module.exports.GetRandomUser = () => User.countDocuments({}).exec()
+
+module.exports.newId = () => User.countDocuments({}).exec()
+
+module.exports.addUser = (id, user) => {
+  User.create({
+    id: id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    username: user.username,
+    salt: user.salt,
+    hash: user.hash,
+  })
+}

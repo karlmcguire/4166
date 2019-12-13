@@ -1,0 +1,55 @@
+<% include header %>
+
+      <div class="pt-4 pb-2">
+        <div class="row">
+        <div class="col">
+        <h1 class="text-secondary pb-4">Sign Up</h1>
+        <% if(failed) { %>
+          <div class="alert alert-danger" role="alert">
+            Please verify that your information fulfills the validation
+            requirements.
+          </div>
+          <br>
+        <% } %>
+        <form action="/signUp" method="POST">
+            <div class="form-group">
+                <label name="username">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Username">
+                <small class="form-text text-muted">Must be alphanumeric and a minimum of 3 characters, maximum 32 characters.</small>
+            </div> 
+            <div class="form-group">
+                <label name="firstName">First Name</label>
+                <input type="text" name="firstName" class="form-control" placeholder="First Name">
+                <small class="form-text text-muted"></small>
+            </div> 
+            <div class="form-group">
+                <label name="lastName">Last Name</label>
+                <input type="text" name="lastName" class="form-control" placeholder="Last Name">
+                <small class="form-text text-muted"></small>
+            </div> 
+            <div class="form-group">
+                <label name="email">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email">
+                <small class="form-text text-muted">Must be a valid email.</small>
+            </div> 
+            <div class="form-group">
+                <label name="password">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                <small class="form-text text-muted">Must be minimum of 4 characters.</small>
+            </div> 
+            <div class="form-group">
+                <label name="password2">Password (Again)</label>
+                <input type="password" name="password2" class="form-control" placeholder="Password (Again)">
+                <small class="form-text text-muted">Must match the previous password.</small>
+            </div> 
+            <div class="form-group">
+                <br>
+                <input type="submit" class="btn btn-primary">
+            </div>
+        </form>
+        </div>
+        <div class="col"></div>
+        </div>
+      </div>
+
+<% include footer %>

@@ -6,7 +6,12 @@
           <% for(var i = 0; i < data.length; i++) { %>
                 <li>
                     <a href="/connection/<%= data[i].id %>">
-                        <h4><%= data[i].title %></h4>
+                        <h4>
+                          <%= data[i].topic %> / <%= data[i].name %>
+                          <% if(user != undefined && data[i].ownerId == user.id) { %>
+                          <span class="badge badge-secondary">Owner</span>
+                          <% } %>
+                        </h4>
                     </a>
                 </li>
           <% } %>

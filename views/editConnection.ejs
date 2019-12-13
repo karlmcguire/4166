@@ -1,0 +1,49 @@
+<% include header %>
+
+      <div class="pt-4 pb-2">
+        <div class="row">
+        <div class="col">
+        <h1 class="text-secondary pb-4">Edit Connection</h1>
+        <% if(failed) { %>
+          <div class="alert alert-danger" role="alert">
+            The input provided was invalid. Please make sure you follow the input guidelines under each input. 
+          </div>
+          <br>
+        <% } %>
+        <form action="/editConnection/<%= data.id %>" method="POST">
+            <div class="form-group">
+                <label name="topic">Topic</label>
+                <input type="text" name="topic" class="form-control" placeholder="Topic" value="<%= data.topic %>">
+                <small class="form-text text-muted">Must be alphanumeric under 300 characters.</small>
+            </div> 
+            <div class="form-group">
+                <label name="name">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Name" value="<%= data.name %>">
+                <small class="form-text text-muted">Must be under 300 characters.</small>
+            </div> 
+            <div class="form-group">
+                <label name="description">Description</label>
+                <textarea class="form-control" rows="3" name="description" placeholder="Description"><%= data.description %></textarea> 
+                <small class="form-text text-muted">Must be under 2500 characters.</small>
+            </div> 
+            <div class="form-group">
+                <label name="location">Location</label>
+                <input type="text" name="location" class="form-control" placeholder="Location" value="<%= data.location %>">
+                <small class="form-text text-muted">Must be under 100 characters.</small>
+            </div>
+            <div class="form-group">
+                <label name="when">When</label>
+                <input type="date" name="when" class="form-control" placeholder="When" value="<%= data.when %>">
+                <small class="form-text text-muted">Must be a date in the future.</small>
+            </div>
+            <div class="form-group">
+                <br>
+                <input type="submit" class="btn btn-primary">
+            </div>
+        </form>
+        </div>
+        <div class="col"></div>
+        </div>
+      </div>
+
+<% include footer %>
